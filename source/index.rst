@@ -10,10 +10,6 @@ Welcome to ANCB's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   about.rst
+   ancb.rst
 
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`search`

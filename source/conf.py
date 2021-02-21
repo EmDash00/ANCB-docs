@@ -22,7 +22,8 @@ copyright = '2021, Drason "Emmy" Chow'
 author = 'Drason "Emmy" Chow'
 
 # The full version, including alpha/beta/rc tags
-release = 'v0.1.0'
+release = '0.1.0b1'
+version = '0.1.0b1'
 
 
 # -- General configuration ---------------------------------------------------
@@ -34,7 +35,8 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.coverage',
     'sphinx.ext.napoleon',
-    'sphinx.ext.viewcode'
+    'sphinx.ext.viewcode',
+    'sphinx.ext.intersphinx'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
