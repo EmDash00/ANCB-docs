@@ -6,10 +6,20 @@
 Welcome to ANCB's documentation!
 ================================================================
 
+Efficient, fast, and powerful NumPy compatible circular buffers for use in data processing,
+especially real-time data processing.
+
+Installation
+------------
+At the command line::
+
+   $ pip3 install ancb
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-
+   
+   usage.rst
    about.rst
    ancb.rst
 
