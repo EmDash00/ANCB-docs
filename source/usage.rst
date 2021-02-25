@@ -42,9 +42,9 @@ be used if you don't want to consume the element at the beginnning of the buffer
    >>> buffer.append([3, 4, 5])
    >>> buffer.append([6, 7, 8])
    >>> buffer
-   >>> array([[0, 1, 2],
-              [3, 4, 5],
-              [6, 7, 8]])
+   array([[0, 1, 2],
+          [3, 4, 5],
+          [6, 7, 8]])
 
 You can check if a buffer is full or empty using useful properties. These are convience O(1)
 operations that check the number of elements in the buffer and do a comparison to see if it's
@@ -53,9 +53,9 @@ full or empty.
 .. doctest::
 
    >>> buffer.full
-   >>> True
+   True
    >>> buffer.empty
-   >>> False
+   False
 
 As a quick explaination of circular buffers, when you write to a full buffer, the oldest
 element is overwritten
@@ -64,9 +64,9 @@ element is overwritten
 
    >>> buffer.append([9, 10, 11]) 
    >>> buffer
-   >>> array([[9, 10, 11],
-              [3, 4, 5],
-              [6, 7, 8]])
+   array([[9, 10, 11],
+          [3, 4, 5],
+          [6, 7, 8]])
 
 Another useful property to test if you're intending on making your own wrappers is fragmentation.
 Rough speaking, when the elements are no longer continuously placed (such as when the end 
@@ -78,7 +78,7 @@ along with its current size to determine if its fragmented.
 .. doctest::
 
    >>> buffer.fragmented
-   >>> True
+   True
 
 Overloaded Operations
 ---------------------
@@ -102,8 +102,8 @@ All this shuffling takes place behind the scenes, so you can do:
 
 .. doctest::
 
-   >>> buffer * np.array([1, 0.5, 0.1]).reshape(3, 1)
-   >>> array([[0.75, 1., 1.25],
-              [3, 3.5, 4.],
-              [9., 10, 11.])
+   >>> buffer * np.array([1, 0.5, 0.25]).reshape(3, 1)
+   array([[0.75, 1., 1.25],
+          [3, 3.5, 4.],
+          [9., 10, 11.])
 
