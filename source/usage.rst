@@ -1,7 +1,7 @@
 Basic Usage
 ===========
 
-A great feature of :class:`NumpyCircularBuffer` is that it inherits from :class:`numpy.ndarray`.
+A great feature of :class:`ancb.NumpyCircularBuffer` is that it inherits from :class:`numpy.ndarray`.
 Many features of *ndarray* are also true of *NumpyCircularBuffer*. 
 
 Instantiation
@@ -32,8 +32,8 @@ Say we have predeclared a buffer that stores 3D vectors as rows.
    data = np.empty((3, 3))
    buffer = NumpyCircularBuffer(data)
 
-Appending and popping elements are done through the :func:`NumpyCircularBuffer.append` 
-and the :func:`NumpyCircularBuffer.pop` functions. :func:`NumpyCircularBuffer.peek` can
+Appending and popping elements are done through the :func:`ancb.NumpyCircularBuffer.append` 
+and the :func:`ancb.NumpyCircularBuffer.pop` functions. :func:`ancb.NumpyCircularBuffer.peek` can
 be used if you don't want to consume the element at the beginnning of the buffer.
 
 .. doctest::
@@ -107,3 +107,50 @@ All this shuffling takes place behind the scenes, so you can do:
           [3, 3.5, 4.],
           [9., 10, 11.])
 
+A Caveat: Matrix Multiplication
+-------------------------------
+
+Most of the library has no overhead; however, an exception to this are certain kinds of 
+matrix multiplication. I will outline the cases below.
+
+Right matrix multiplication (x @ buffer) if the buffer is fragmented:
+
+- x.ndim == 1 and buffer.ndim > 1 or
+- x.ndim > 1 and buffer.ndim == 1 or
+- buffer.ndim == 2
+
+Left matrix multiplication (buffer @ x) if the buffer is fragmented:
+
+- buffer.ndim == 1
+
+**In all of these cases, the overhead is a memory allocation of an ndarray equal to the size
+of the output.** For all functions in ANCB, the specified operation takes placce in two seperate
+parts; however, for these kinds of matrix multiplication, the parts overlap and must be added
+together for the final result unlike other functions.
+
+The functions :func:`ancb.NumpyCircularBuffer.matmul` and :func:`ancb.NumpyCircularBuffer.rmatmul`
+have been provided to combat this overhead. They allow you to use preallocated space to reduce
+the overhead of the allocations for repeated operations in a loop.
+
+.. testcode::
+
+   import numpy as np
+   from ancb import NumpyCircularBuffer
+
+   data = np.empty(3)
+   buffer = NumpyCircularBuffer(data)
+
+   buffer.append(0)
+   buffer.append(1)
+   buffer.append(2)
+   buffer.append(3)
+
+   A = np.arange(9).reshape(3, 3)
+   work_buffer = empty(3)
+
+   # Same as A @ buffer
+   print(buffer.rmatmul(A, work_buffer))
+
+.. testoutput::
+
+   [8 26 44]
