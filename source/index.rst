@@ -6,8 +6,9 @@
 Welcome to ANCB's documentation!
 ================================================================
 
-Efficient, fast, and powerful NumPy compatible circular buffers for use in data processing,
-especially real-time data processing.
+Another Numpy Circular Buffer is an efficient, fast, and powerful NumPy 
+compatible circular buffers for use in data processing, especially 
+real-time data processing.
 
 Installation
 ------------
