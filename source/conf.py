@@ -63,4 +63,7 @@ html_theme = 'sphinx_rtd_theme'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-intersphinx_mapping = {'numpy': ('https://numpy.org/doc/1.20/', None)}
+intersphinx_mapping = {
+    'numpy': ('https://numpy.org/doc/1.20/', None),
+    'python': ('https://docs.python.org/3', None)
+}
